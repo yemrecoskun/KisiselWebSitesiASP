@@ -1,0 +1,206 @@
+﻿@using WebProje.Service
+@{Service servis = new Service();}
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8" />
+    <link type="text/css" rel="stylesheet" href="~/Content/css/anasayfa.css">
+    <title>Anasayfa</title>
+    <style type="text/css">
+        /*W3SCHOOL TABLE*/
+        table#t01 tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table#t01 tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        table#t01 th {
+            background-color: black;
+            color: white;
+        }
+
+        #myInput {
+            background-image: url('../img/searchicon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            background-size: 20px;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+        table.duyuru {
+            width: 100%;
+        }
+
+        table.duyuru ,.duyuru th,.duyuru td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .duyuru th,.duyuru td {
+            padding: 15px;
+            text-align: left;
+        }
+
+    </style>
+</head>
+<body>
+    <!--w3schools-menu -->
+
+    <div class="content" style="height:auto">
+        <table class="sosyalmedya">
+            <tr>
+                <th class="dondur"><a href="https://www.youtube.com/channel/UCugA9XdVMXnju0Rby4ezBIQ?view_as=subscriber" target="_blank"><img src="~/Content/img/youtube.png" /></a></th>
+                <th class="dondur"><a href="https://www.facebook.com/emrecoskun123" target="_blank"><img src="~/Content/img/facebook.png" /></a></th>
+                <th class="dondur"><a href="https://www.instagram.com/y.emre.coskun/" target="_blank"><img src="~/Content/img/instagram.jfif" /></a></th>
+            </tr>
+        </table>
+    </div>
+    <div id="allcontent">
+        <header>YUNUS EMRE COŞKUN - Kişisel Web Sayfası</header>
+        <div class="content" style="height:100px;margin-left:53%; margin-top:5%"><h2>ANASAYFA</h2></div>
+        <div class="content">
+            <div class="slideshow-container">
+
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <img src="~/Content/img/konu1.jfif" style="width:100%">
+                    <div class="text">Sofware</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 3</div>
+                    <img src="~/Content/img/konu2.jfif" style="width:100%">
+                    <div class="text">Sofware</div>
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 3</div>
+                    <img src="~/Content/img/konu3.jfif" style="width:100%">
+                    <div class="text">Sofware</div>
+                </div>
+
+            </div>
+            <br>
+        </div>
+        <div class="content" style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <!--w3schools-card-->
+        <div class="content" style="height:100px;margin-left:50%; margin-top:5%"><h2>YAZILIM HABERLERİ</h2></div>
+        <div class="duyuru-content">
+            <div class="column">
+                <div class="card">
+                    <div class="dondur">
+                        <img class="duyuruimg" src="~/Content/img/haber1.jpg" />
+                        <p>Huawei Harmony OS, 2020'de En Popüler 5. İşletim Sistemi Olacak</p>
+                        <h3>Huawei Harmony OS İşletim Sistemi</h3>
+                        <a href="https://www.webtekno.com/huawei-harmony-os-populer-isletim-sistemi-h80840.html" target="_blank"> Git</a>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="dondur">
+                        <img class="duyuruimg" src="~/Content/img/haber2.jpg" />
+                        <p>Django 3.0 Yayınlandı: İşte Gelen Tüm Yenilikler</p>
+                        <h3>Django 3.0</h3>
+                        <a href="https://www.webtekno.com/django-3-0-yayinlandi-h80944.html" target="_blank"> Git</a>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="dondur">
+                        <img class="duyuruimg" src="~/Content/img/haber3.jpg" />
+                        <p>2020'nin İlk Windows 10 Güncellemesi Neden 2004 Yapı Numarasını Aldı?</p>
+                        <h3>Windows 10</h3>
+                        <a href="https://www.webtekno.com/2020-windows-10-guncellemesi-neden-2004-oldu-h80711.html" target="_blank"> Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content" style="height:100px;margin-left:50%;margin-top:25%;"><h2>YAZILIM DUYURULAR</h2></div>
+        <div class="content">
+            <center><input type="text" id="myInput" onkeyup="myFunction1()" placeholder="Duyuru Ara..." title="Type in a name"></center>
+            <table id="t01" class="duyuru">
+                <tr>
+                    <th>Id</th>
+                    <th>Açıklama</th>
+                </tr>
+                @foreach (var item in servis.DuyuruListesi())
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.aciklama</td>
+                    </tr>
+                }
+            </table>
+            <br />
+        </div>
+</body>
+<script>
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+    }
+
+    var rd = true;
+    function altmenu() {
+
+        if (rd == true) {
+            document.getElementById("altmenu").style.display = "block"; rd = false;
+        }
+        else { document.getElementById("altmenu").style.display = "none"; rd = true; }
+    }
+    var rd1 = true;
+    function altmenu1() {
+
+        if (rd1 == true) {
+            document.getElementById("altmenu1").style.display = "block"; rd1 = false;
+        }
+        else { document.getElementById("altmenu1").style.display = "none"; rd1 = true; }
+    }
+    function myFunction1() {
+        var input, filter, table, tr, td, td1, i, txtValue, txtValue1;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("t01");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            td1 = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                txtValue1 = td1.textContent || td1.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+</html>

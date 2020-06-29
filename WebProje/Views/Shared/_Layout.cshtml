@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnaSayfa</title>
+    <link type="text/css" rel="stylesheet" href="~/Content/css/layout/layout.css">
+    <script src="~/Scripts/JavaScript.js"></script>
+</head>
+<body>
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="~/Content/img/top.jpg" /></button>
+    <ul class="menu">
+        <li><img class="logo" src="~/Content/css/layout/logo_transparent.png" style="width:100%;height:200px;" /></li>
+
+        <li>
+            @if (Session["Izin_bilgileri"].ToString() == "3")
+            {
+                <a href="/Web/Login">Giriş Yap</a>
+            }
+            <a href="/Web/Index">Anasayfa</a>
+        </li>
+        <li>
+            <a href="#" onclick="altmenu1()">Bilgilerim <img style="width:50px;height:50px;float:right;margin-top:-5%;margin-right:-7%;" src="~/Content/css/layout/arrowbottom.svg" /></a>
+            <ul class="altmenu" id="altmenu1">
+                <li><a href="/Web/kisisel" target="_blank">Kişisel Bilgilerim</a></li>
+                <li><a href="/Web/egitim" target="_blank">Eğitim Bilgilerim</a></li>
+                <li><a href="/Web/amac" target="_blank">Ben kimim?</a></li>
+            </ul>
+        </li>
+        <li><a href="/Web/yazilim">Yazılım </a></li>
+        <li><a href="/Web/Hakkimda" target="_blank">Hakkımda</a></li>
+        <li><a href="/Web/iletisim">İletişim</a></li>
+        @{ var data = Session["Izin_bilgileri"].ToString();}
+        @if (Session["Izin_bilgileri"].ToString() == "1")
+        {
+            <li><a href="/Web/AdminPaneli">Admin Paneli</a></li>
+        }
+        @if (Session["Izin_bilgileri"].ToString() != "3")
+        {
+            <li><a href="/Web/Login">Çıkış</a></li>
+        }
+    </ul>
+    <div class="container body-content">
+        sci     @RenderBody()
+        <hr />
+        <footer style="margin-left:20%;width:67%">
+            <center>
+                <div>Hakkında | Copyright | Bilgilerim | İletişim</div>
+                <br />
+                <div>Tel: 05318612795</div>
+                <div>Email: jrewin@hotmail.com</div>
+                <p>&copy; @DateTime.Now.Year - Tüm hakları saklıdır.</p>
+            </center>
+        </footer>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+
+        var mybutton = document.getElementById("myBtn");
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+</html>

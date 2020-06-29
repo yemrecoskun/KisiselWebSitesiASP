@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "amac";
+}
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="UTF-8" />
+    <link href="~/Content/css/bilgilerim.css" rel="stylesheet" />
+    <title>Ben Kimim?</title>
+</head>
+<body>
+    <div class="content" style="height:auto">
+        <header>YUNUS EMRE COŞKUN - Kişisel Web Sayfası</header>
+        <br /><br />
+        <center>
+            <div class="card">
+                <br /><br />
+                <img src="~/Content/img/ozgecmis.jpeg" alt="Avatar" style="width:300px;height:300px">
+                <div class="container">
+                    <h4><b>Yunus Emre COŞKUN</b></h4>
+                    <h4><b>Ben Kimim?(Amaç, Hedef)</b></h4>
+                    <p>Kocaeli Üniversitesi, Bilişim Sistemleri Mühendisliği bölümünü okuyorum. Amacım, yazılım alanına hakim olarak mezun olmak; hedefim, yazılım sektöründe kariyer yapmak.</p>
+                </div>
+            </div>
+        </center>
+        <br />
+    </div>
+</body>
+<script>document.getElementById("altmenu1").style.display = "block";
+    var rd1 = false;
+    function altmenu1() {
+
+        if (rd1 == true) {
+            document.getElementById("altmenu1").style.display = "block"; rd1 = false;
+        }
+        else { document.getElementById("altmenu1").style.display = "none"; rd1 = true; }
+    }</script>
+</html>

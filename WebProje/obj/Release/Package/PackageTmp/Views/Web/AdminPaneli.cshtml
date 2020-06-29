@@ -1,0 +1,297 @@
+﻿@using WebProje.Service;
+@{
+    ViewBag.Title = "AdminPaneli";
+    Service servis = new Service();
+}
+<html>
+<head>
+    <link href="~/Content/css/AdminPaneli.css" type="text/css" rel="stylesheet" />
+    <style type="text/css">
+        /*W3SCHOOL TABLE*/
+        table#t01 tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table#t01 tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        table#t01 th {
+            background-color: black;
+            color: white;
+        }
+
+        table#t02 tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table#t02 tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        table#t02 th {
+            background-color: black;
+            color: white;
+        }
+
+        table#t03 tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table#t03 tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        table#t03 th {
+            background-color: black;
+            color: white;
+        }
+
+        table#t04 tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table#t04 tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        table#t04 th {
+            background-color: black;
+            color: white;
+        }
+
+        #myInput, #myInput2, #myInput3, #myInput4 {
+            background-image: url('../img/searchicon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            background-size: 20px;
+            width: 100%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+        }
+    </style>
+    <title>Admin Paneli</title>
+</head>
+<body>
+    @if (Session["Izin_bilgileri"].ToString() == "3")
+    {
+        <script type="text/javascript">window.location.href = "/Web/Index"</script>
+    }
+    else
+    {
+
+        <div class="content">
+            <center><h1>Admin Paneli</h1></center>
+            <h2>Kullanıcı Listesi</h2>
+            <center><input type="text" id="myInput" onkeyup="myFunction1()" placeholder="Kullanici Id veya KullaniciAdi Ara..." title="Type in a name"></center>
+            <table id="t01" name="kullanicitablosu">
+                <tr>
+                    <th>Id</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>Email</th>
+                    <th>İzin Bilgileri</th>
+                </tr>
+                @{ var izinler = servis.IzinListesi();}
+                @foreach (var item in servis.KullaniciListesi((Session["KullaniciAdi"]).ToString()))
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.KullaniciAdi</td>
+                        <td>@item.Email</td>
+                        <td>
+                            <select id="@item.Id" style="width:200px;height:30px;font-size:large">
+                                @foreach (var item1 in izinler)
+                                {
+                                    if (item.Izin_bilgileri == item1.Id)
+                                    {
+                                        <option value="@item1.Id" selected>@item1.IzinAdı</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item1.Id">@item1.IzinAdı</option>
+                                    }
+
+                                }
+                            </select>
+                            <input type="button" onclick="degistirvalue(@item.Id)" value="Değiştir" style="background-color:black;width:200px;height:30px;color:white;" required />
+                        </td>
+                    </tr>
+                }
+            </table>
+
+            <h2>Duyuru Listesi</h2>
+            <center><input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Duyuru Ara..." title="Type in a name"></center>
+            <table id="t02" class="duyuru">
+                <tr>
+                    <th>Id</th>
+                    <th>Açıklama</th>
+                </tr>
+                @foreach (var item in servis.DuyuruListesi())
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.aciklama</td>
+                    </tr>
+                }
+                @using (Html.BeginForm("DuyuruEkle", "Web", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <form class="DuyuruEklemeFormu">
+                        <tr>
+                            <td><input type="submit" value="Ekle" onclick="DuyuruEkle()" style="background-color:black;width:200px;height:50px;color:white;float:right" required /></td>
+                            <td><input type="text" id="aciklama" name="aciklama" required /></td>
+                        </tr>
+                    </form>
+                }
+            </table>
+
+            <h2>Mesaj Listesi(Üyeler)</h2>
+            <center><input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="Duyuru Ara..." title="Type in a name"></center>
+            <table id="t03" class="MesajListesi">
+                <tr>
+                    <th>KullaniciAdi</th>
+                    <th>Adı</th>
+                    <th>Soyadı</th>
+                    <th>Email Adresi</th>
+                    <th>Mesajı</th>
+                </tr>
+                @foreach (var item in servis.UyeMesajListesi())
+                {
+                    <tr>
+                        <td>@item.KullaniciAdi</td>
+                        <td>@item.Ad</td>
+                        <td>@item.Soyad</td>
+                        <td>@item.Email</td>
+                        <td>@item.Mesaj</td>
+                    </tr>
+                }
+            </table>
+            <h2>Mesaj Listesi(Misafirler)</h2>
+            <center><input type="text" id="myInput4" onkeyup="myFunction4()" placeholder="Duyuru Ara..." title="Type in a name"></center>
+            <table id="t04" class="MesajListesi">
+                <tr>
+                    <th>Adı</th>
+                    <th>Soyadı</th>
+                    <th>Doğum Tarihi</th>
+                    <th>Telefon Numarası</th>
+                    <th>Email</th>
+                    <th>Mesaj</th>
+                </tr>
+                @foreach (var item in servis.MisafirMesajListesi())
+                {
+                    <tr>
+                        <td>@item.adi</td>
+                        <td>@item.soyadi</td>
+                        <td>@item.dogumtarihi</td>
+                        <td>@item.telno</td>
+                        <td>@item.email</td>
+                        <td>@item.mesaj</td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <script type="text/javascript">
+            function degistirvalue(id) {
+                var a = "select#" + id;
+                var deger = $(a).val();
+                $.ajax({
+                    url: '/Web/IzinDegistir',
+                    type: 'POST',
+                    data: { deger: deger, id: id },
+                    success: function () {
+                        alert("İzin Değişti")
+                    }
+                })
+            }
+            function myFunction1() {
+                var input, filter, table, tr, td, td1, i, txtValue, txtValue1;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("t01");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    td1 = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        txtValue1 = td1.textContent || td1.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+            function myFunction2() {
+                var input, filter, table, tr, td, td1, i, txtValue, txtValue1;
+                input = document.getElementById("myInput2");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("t02");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    td1 = tr[i].getElementsByTagName("td")[2];
+                    td2 = tr[i].getElementsByTagName("td")[3];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        txtValue1 = td1.textContent || td1.innerText;
+                        txtValue2 = td2.textContent || td2.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+            function myFunction3() {
+                var input, filter, table, tr, td, td1, i, txtValue, txtValue1;
+                input = document.getElementById("myInput3");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("t03");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    td1 = tr[i].getElementsByTagName("td")[1];
+                    td2 = tr[i].getElementsByTagName("td")[2];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        txtValue1 = td1.textContent || td1.innerText;
+                        txtValue2 = td2.textContent || td2.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+            function myFunction4() {
+                var input, filter, table, tr, td, td1, i, txtValue, txtValue1;
+                input = document.getElementById("myInput4");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("t04");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    td1 = tr[i].getElementsByTagName("td")[1];
+                    td2 = tr[i].getElementsByTagName("td")[4];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        txtValue1 = td1.textContent || td1.innerText;
+                        txtValue2 = td2.textContent || td2.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue1.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        </script>
+    }
+</body>
+</html>
+

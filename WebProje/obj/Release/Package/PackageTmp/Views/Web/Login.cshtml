@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link type="text/css" rel="stylesheet" href="~/Content/css/layout/layout.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/login.css">
+    <script src="~/Scripts/JavaScript.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <div class="container">
+            <div class="row">
+                <h1 style="text-align:center">Kullanıcı Giriş ve Kayıt</h1>
+                <div class="vl">
+                    <span class="vl-innertext"></span>
+                </div>
+
+                <div class="col">
+                    <h3 style="text-align:center">Kullanıcı Giriş</h3>
+                    <span id="UyariGiris" style="display:block;color:red"></span>
+                    <input type="text" id="KullaniciAdiGiris" placeholder="Kullanıcı Adi" value="@Session["KullaniciAdi"]" required>
+                    <input type="password" id="SifreGiris" placeholder="Şifre" value="@Session["Sifre"]" required>
+                    <input type="submit" value="Giriş" onclick="Giris()">
+                    <a href="/Web/Index"><input type="submit" value="Misafir Giris" style="background-color:red" /></a>
+
+                    @if (Session["Checkbox"].ToString() == "1")
+                    {
+                        <center>
+                            <input type="checkbox" id="hatirla" checked>Beni Hatırla
+                        </center>
+                    }
+                    else
+                    {
+                        <center>
+                            <input type="checkbox" id="hatirla">Beni Hatırla
+                        </center>
+                    }
+                    <center>
+                        <a href="#" style="color:blue" class="btn" onclick="document.getElementById('sifremiunuttum').style.display='block'">Şifremi Unuttum</a>
+                    </center>
+                    <div id="sifremiunuttum" style="display:none">
+                        <span id="UyariUnuttum" style="display:block;color:red"></span>
+                        <input type="email" id="EmailUnuttum" placeholder="Lütfen kayıt olduğunuz maili yazınız." required>
+                        <input type="text" id="KullaniciAdiUnuttum" placeholder="Lütfen kayıt olduğunuz kullanıcı adını yazınız." required>
+                        <input type="submit" value="ONAY" onclick="SifremiUnuttum()">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="hide-md-lg">
+                        <p>Or sign in manually:</p>
+                    </div>
+                    <h3 style="text-align:center">Kullanıcı Kayıt</h3>
+                    <span id="Uyari" style="display:block;color:red"></span>
+                    <input type="text" id="KullaniciAdi" placeholder="Kullanıcı Adı" required>
+                    <input type="password" id="Sifre" placeholder="Şifre" required>
+                    <input type="password" id="Sifre1" placeholder="Şifre (Tekrar)" required>
+                    <input type="text" id="Ad" placeholder="Adınız" required>
+                    <input type="text" id="Soyad" placeholder="Soyadınız" required>
+                    <input type="email" id="email" placeholder="Mail Adresiniz" required>
+                    <input type="submit" value="Kayıt" onclick="Kayit()">
+                </div>
+            </div>
+
+        </div>
+        <div class="bottom-container">
+            <div class="row">
+                <div class="col">
+                    <br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

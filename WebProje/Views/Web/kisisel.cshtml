@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "kisisel";
+}
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="~/Content/css/bilgilerim.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <title>Kişisel Bilgilerim</title>
+</head>
+<body>
+    <div class="content" style="height:auto">
+        <header>YUNUS EMRE COŞKUN - Kişisel Web Sayfası</header>
+        <br /><br />
+        <center>
+            <div class="card">
+                <br /><br />
+                <img src="~/Content/img/ozgecmis.jpeg" alt="Avatar" style="width:300px;height:300px">
+                <div class="container">
+                    <h4><b>Yunus Emre COŞKUN</b></h4>
+                    <h4><b>Kişisel Bilgilerim</b></h4>
+                    <p>E-posta: y.emrecoskun@gmail.com</p>
+                    <p>Telefon Numarası: 0530 860 2090</p>
+                    <p>Adres: Kartaltepe mah yıldız sok. no=9/d=3 Çankırı/Ankara</p>
+                </div>
+            </div>
+        </center>
+        <br />
+    </div>
+</body>
+<script>
+    var mybutton = document.getElementById("myBtn");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }</script>
+</html>
+

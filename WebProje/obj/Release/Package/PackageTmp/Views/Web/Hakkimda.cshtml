@@ -1,0 +1,179 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link type="text/css" rel="stylesheet" href="~/Content/css/hakkimda.css">
+    <script src="~/Scripts/jspdf.min.js"></script>
+    <script src="~/Scripts/jspdf.debug.js"></script>
+    <script src="~/Scripts/jquery.js"></script>
+    <meta charset="UTF-8" />
+    @if (Session["Izin_bilgileri"].ToString() == "1")
+    {
+        <script>
+            function saveas() {
+                var baslik = document.getElementById("baslik").textContent;
+                var kisiselbaslik = document.getElementById("kisiselbaslik").textContent;
+                var kisisel1 = document.getElementById("kisisel1").textContent; var kisisel2 = document.getElementById("kisisel2").textContent; var kisisel3 = document.getElementById("kisisel3").textContent; var kisisel4 = document.getElementById("kisisel4").textContent;
+                var egitimbaslik = document.getElementById("egitimbaslik").textContent;
+                var egitim1 = document.getElementById("egitim1").textContent; var egitim2 = document.getElementById("egitim2").textContent; var egitim3 = document.getElementById("egitim3").textContent;
+                var yetenekbaslik = document.getElementById("yetenekbaslik").textContent;
+                var yetenek1 = document.getElementById("yetenek1").textContent;
+                var dilyetenek1 = document.getElementById("dilyetenek1").textContent; var dilyetenek2 = document.getElementById("dilyetenek2").textContent; var dilyetenek3 = document.getElementById("dilyetenek3").textContent; var dilyetenek4 = document.getElementById("dilyetenek4").textContent;
+                var yetenek2 = document.getElementById("yetenek1").textContent;
+                var programyetenek1 = document.getElementById("programyetenek1").textContent; var programyetenek2 = document.getElementById("programyetenek2").textContent; var programyetenek3 = document.getElementById("programyetenek3").textContent; var programyetenek4 = document.getElementById("programyetenek4").textContent;
+                var projebaslik = document.getElementById("projebaslik").textContent;
+                var proje1 = document.getElementById("proje1").textContent; var proje2 = document.getElementById("proje2").textContent; var proje3 = document.getElementById("proje3").textContent; var proje4 = document.getElementById("proje4").textContent; var proje5 = document.getElementById("proje5").textContent;
+                var isbaslik = document.getElementById("isbaslik").textContent; var is1 = document.getElementById("is1").textContent;
+                var digerbaslik = document.getElementById("digerbaslik").textContent;
+                var hobiler = document.getElementById("hobiler").textContent;
+                var hobi1 = document.getElementById("hobi1").textContent; var hobi2 = document.getElementById("hobi2").textContent; var hobi3 = document.getElementById("hobi3").textContent; var hobi4 = document.getElementById("hobi4").textContent;
+                var diller = document.getElementById("diller").textContent;
+                var dil1 = document.getElementById("dil1").textContent;
+                var pdf = new jsPDF();
+                pdf.setFont("arial", "bold");
+                pdf.setFontSize(20);
+                pdf.text(70, 30, baslik);
+                pdf.setFontSize(10);
+                pdf.text(20, 50, kisiselbaslik);
+                pdf.setFont("arial", "")
+                pdf.text(20, 60, kisisel1); pdf.text(20, 70, kisisel2); pdf.text(20, 80, kisisel3); pdf.text(20, 90, kisisel4);
+                pdf.setFont("arial", "bold")
+                pdf.text(100, 50, egitimbaslik);
+                pdf.setFont("arial", "")
+                pdf.text(100, 60, egitim1); pdf.text(100, 70, egitim2); pdf.text(100, 80, egitim3);
+                pdf.setFont("arial", "bold")
+                pdf.text(20, 110, yetenekbaslik);
+                pdf.setFont("arial", "")
+                pdf.text(20, 120, yetenek1);
+                pdf.text(55, 120, dilyetenek1); pdf.text(55, 125, dilyetenek2); pdf.text(55, 130, dilyetenek3); pdf.text(55, 135, dilyetenek4);
+                pdf.text(20, 140, yetenek2);
+                pdf.text(55, 140, programyetenek1); pdf.text(55, 145, programyetenek2); pdf.text(55, 150, programyetenek3); pdf.text(55, 155, programyetenek4);
+                pdf.setFont("arial", "bold")
+                pdf.text(100, 110, projebaslik);
+                pdf.setFont("arial", "")
+                pdf.text(100, 120, proje1); pdf.text(100, 130, proje2); pdf.text(100, 140, proje3); pdf.text(100, 150, proje4); pdf.text(100, 160, proje5);
+                pdf.setFont("arial", "bold")
+                pdf.text(20, 180, isbaslik);
+                pdf.setFont("arial", "")
+                pdf.text(20, 190, is1);
+                pdf.setFont("arial", "bold")
+                pdf.text(100, 180, digerbaslik);
+                pdf.setFont("arial", "")
+                pdf.text(100, 190, hobiler); pdf.text(125, 190, hobi1); pdf.text(125, 195, hobi2); pdf.text(125, 200, hobi3); pdf.text(125, 205, hobi4);
+                pdf.text(100, 210, diller); pdf.text(126, 210, dil1);
+                pdf.save('yunusemrecoskunCV.pdf');
+            }</script>
+        <title>Hakkimda</title>
+        <script type="text/javascript">
+            //var durum = true;
+            //function duzenle(div) {
+            //    if (durum = true) {
+            //        edit(div);
+            //        document.getElementById("duzenle").text = "Kaydet";
+            //    }
+            //    else {
+            //        save(div);
+            //        document.getElementById("duzenle").text = "Düzenle";
+            //    }
+            //}
+            function edit(div) {
+                div.style.border = "3px solid #333";
+                div.style.padding = "10px";
+                div.contentEditable = true;
+                //durum = false;
+            }
+            function save(div) {
+                div.style.border = "";
+                div.style.padding = "";
+                div.contentEditable = false;
+                //durum = true;
+            }</script>
+    }
+</head>
+<body>
+
+    <center>
+        <fieldset>
+            <legend> Özgeçmiş</legend>
+            <!--<button type="button" onclick="duzenle('ozgecmis')" id="duzenlebtn"> Düzenle</button>-->
+            <button type="button" onclick="saveas()"> İNDİR </button>
+            <div class="content ozgecmis" id="ozgecmis">
+                <br />
+                <div class="bolum1" ondblclick="edit(this)" onblur="save(this)">
+                    <center><h1 id="baslik">YUNUS EMRE COSKUN</h1></center>
+                </div>
+                <br />
+                <div class="bolum1" ondblclick="edit(this)" onblur="save(this)">
+                    <div style="font-size: 20px;font-weight: bold;" id="kisiselbaslik">Kisisel Bilgiler</div>
+                    <div id="kisisel1">Ad Soyad: Yunus Emre COSKUN</div>
+                    <div id="kisisel2">Dogum Tarihi: 09.03.1998</div>
+                    <div id="kisisel3">Dogum Yeri: Bakirkoy</div>
+                    <div id="kisisel4">Ehliyet B Sinifi</div>
+                </div>
+                <br />
+                <div class="bolum1" ondblclick="edit(this)" onblur="save(this)">
+                    <div style="font-size: 20px;font-weight: bold;" id="egitimbaslik">Egitim Bilgileri </div>
+                    <div id="egitim1">2017-~ Kocaeli Universitesi-Bilisim Sistemleri Muhendisligi </div>
+                    <div id="egitim2">2012-2016 Küçükçekmece Anadolu Teknik  ve Meslek Lisesi </div>
+                    <div id="egitim3">2003-2012 Mustafa Kemal Pasa IlkOgretim  Okulu </div>
+                </div>
+                <br />
+                <div class="bolum1" ondblclick="edit(this)" onblur="save(this)">
+                    <div style="font-size: 20px;font-weight: bold;" id="yetenekbaslik">Yetenek Bilgileri </div>
+                    <div id="yetenek1" style="font-size: 15px;font-weight: bold;">Programlama Dilleri </div>
+                    <div id="dilyetenek1">C#</div>
+                    <div id="dilyetenek2">HTML</div>
+                    <div id="dilyetenek3">CSS</div>
+                    <div id="dilyetenek4">JS</div>
+                    <div id="yetenek2" style="font-size: 15px;font-weight: bold;">Programlar</div>
+                    <div id="programyetenek1">ASP.NET MVC</div>
+                    <div id="programyetenek2">.NET FRAMEWORK</div>
+                    <div id="programyetenek3">WPF</div>
+                    <div id="programyetenek4">WINFORM</div>
+                </div>
+            </div>
+            <br />
+            <div class="bolum1" ondblclick="edit(this)" onblur="save(this)">
+                <div style="font-size: 20px;font-weight: bold;" id="projebaslik">Projeler </div>
+                <div id="proje1">2019 - Test Sinavi Degerlendirme Otomasyonu (ASP.NET MVC, MySQL)</div>
+                <div id="proje2">2019 - Sigorta Satis Otomasyon Sitesi (ASP.NET MVC, MySQL)</div>
+                <div id="proje3">2018 - Surucu Kursu Otomasyon Projesi Projesi (WinForm C#,MySQL)</div>
+                <div id="proje4">2018 - Kres Mobil Uygulama Projesi(Ionic framework,Firebase)</div>
+                <div id="proje5">2017 - Ogrenci Bilgi Sistemi Projesi(WinForm C++,Dosya Islemleri)</div>
+            </div>
+            <br />
+            <div class="bolum1" ondblclick="edit(this)" onblur="save(this)">
+                <div style="font-size: 20px;font-weight: bold;" id="isbaslik">Is Deneyimleri</div>
+                <div id="is1"> Vakifbank(Stajyer 30 is gunu)  </div>
+            </div>
+            <br />
+            <div class="bolum1" ondblclick="edit(this)" onblur="save(this)">
+                <div style="font-size: 20px;font-weight: bold;" id="digerbaslik">Diger</div>
+                <div id="hobiler" style="font-size: 15px;font-weight: bold;"> Hobiler </div>
+                <div id="hobi1"> Spor</div>
+                <div id="hobi2"> Basketbol</div>
+                <div id="hobi3"> Bilgisayar</div>
+                <div id="hobi4"> Bilisim</div>
+                <div id="diller" style="font-size: 15px;font-weight: bold;"> Diller </div>
+                <div id="dil1">Ingilizce (B Seviye)</div>
+            </div>
+            </div>
+        </fieldset>
+        <br /><br />
+    </center>
+    <footer>
+        <center>
+            <div>Hakkında | Copyright | Bilgilerim | İletişim</div>
+            <br />
+            <div>Tel: 05318612795</div>
+            <div>Email: jrewin@hotmail.com</div>
+            <div>  © 2019 Tüm hakları saklıdır.</div>
+        </center>
+    </footer>
+</body>
+</html>

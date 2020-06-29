@@ -1,0 +1,81 @@
+﻿@using WebProje.Service;
+@{
+    ViewBag.Title = "iletisim";
+    Service servis = new Service();
+    WebProje.Models.Kullanici kullanicibilgileri = new WebProje.Models.Kullanici();
+    if(Session["Izin_bilgileri"].ToString() == "3")
+    {
+        kullanicibilgileri.Ad = "";
+        kullanicibilgileri.Soyad = "";
+        kullanicibilgileri.Email = "";
+    }
+    else
+    {
+        var id = Session["KullaniciId"].ToString();
+        kullanicibilgileri = servis.GetirKullaniciBilgileri(id);
+    }
+}
+<html>
+<head>
+    <link href="~/Content/css/iletisim.css" rel="stylesheet" />
+    <script src="~/Scripts/JavaScript.js"></script>
+    <meta charset="UTF-8" />
+    <title>İletişim</title>
+</head>
+<body>
+    <br /><br />
+    <div class="content">
+        <br />
+        <center><span> İLETİŞİM</span></center>
+        @{
+
+            <label for="adi">Adı</label>
+            <input type="text" id="adi" name="adi" value="@kullanicibilgileri.Ad" placeholder="Adı" required />
+
+            <label for="soyadi">Soyadı</label>
+            <input type="text" id="soyadi" name="soyadi" value="@kullanicibilgileri.Soyad" placeholder="Soyadı" required />
+
+            <label for="tarih">Doğum Tarihi</label>
+            <input type="date" id="dogumtarihi" name="dogumtarihi" required />
+
+            <label for="tel">Telefon Numarası</label>
+            <input type="tel" size="8" id="telno" name="telno" placeholder=" 0555 55 55" required />
+
+            <label for="mail">E-Mail</label>
+            <input type="email" id="email" name="email" value="@kullanicibilgileri.Email" placeholder="email@hotmail.com" required />
+
+        }
+        <label for="mesaj"> Mesajınız</label>
+        <textarea id="mesaj" name="mesaj" placeholder="İletmek istediğiniz mesajı yazınız" required></textarea>
+        <input type="submit" value="Gönder" onclick="MesajGonder()">
+        <br />
+        <br />
+    </div>
+    <script>
+        var rd1 = true;
+        function altmenu1() {
+
+            if (rd1 == true) {
+                document.getElementById("altmenu1").style.display = "block"; rd1 = false;
+            }
+            else { document.getElementById("altmenu1").style.display = "none"; rd1 = true; }
+        }
+        function MesajGonder() {
+            var adi = $("#adi").val();
+            var soyadi = $("#soyadi").val();
+            var dogumtarihi = $("#dogumtarihi").val();
+            var telno = $("#telno").val();
+            var email = $("#email").val();
+            var mesaj = $("#mesaj").val();
+            $.ajax({
+                type: 'POST',
+                url: '/Web/MesajGonder',
+                data: { adi: adi, soyadi: soyadi, dogumtarihi: dogumtarihi, telno: telno, email: email, mesaj: mesaj },
+                success: function (data) {
+                    alert("Mesaj Gönderildi!");
+                }
+            })
+        }
+    </script>
+</body>
+</html>
